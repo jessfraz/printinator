@@ -27,15 +27,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create the status item.
         self.statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
         if let button = self.statusBarItem.button {
-            button.title = "3D Printers"
             button.action = #selector(togglePopover(_:))
+            let image = NSImage(named: "form3")!
+            image.size = NSSizeFromString("14,18")
+            button.image = image
         }
         
         // Initialize FormLabs.
-        
+        let formLabs = FormLabs.init(self)
         
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = ContentView(formLabs: formLabs)
 
         // Create the popover
         let popover = NSPopover()

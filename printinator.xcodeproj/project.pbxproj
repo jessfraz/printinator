@@ -3,18 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		485C9D519C7B55B2758E18BA /* Pods_printinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4914C81025CA2D7859BFE48 /* Pods_printinator.framework */; };
 		C80F0F0625E56CB70001D70E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F0525E56CB70001D70E /* AppDelegate.swift */; };
 		C80F0F0825E56CB70001D70E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F0725E56CB70001D70E /* ContentView.swift */; };
 		C80F0F0A25E56CBD0001D70E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C80F0F0925E56CBD0001D70E /* Assets.xcassets */; };
 		C80F0F4425E56D410001D70E /* FormLabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F4325E56D410001D70E /* FormLabs.swift */; };
 		C80F0F5225E577AA0001D70E /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = C80F0F5125E577AA0001D70E /* Preview Content */; };
+		C80F0F5F25E579F30001D70E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C80F0F5E25E579F30001D70E /* Alamofire.framework */; };
+		C80F0F6825E580200001D70E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F6725E580200001D70E /* UserDefaults.swift */; };
+		C80F0F6B25E58FAD0001D70E /* FormLabsTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F6A25E58FAD0001D70E /* FormLabsTypes.swift */; };
+		C80F0F6E25E5A0B70001D70E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F6D25E5A0B70001D70E /* SettingsView.swift */; };
+		C80F0F7125E5C6580001D70E /* PrinterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F7025E5C6580001D70E /* PrinterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5072FF87C618425B08C95C53 /* Pods-printinator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-printinator.debug.xcconfig"; path = "Target Support Files/Pods-printinator/Pods-printinator.debug.xcconfig"; sourceTree = "<group>"; };
+		BD76A245F847AF5C5D372B8D /* Pods-printinator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-printinator.release.xcconfig"; path = "Target Support Files/Pods-printinator/Pods-printinator.release.xcconfig"; sourceTree = "<group>"; };
+		C4914C81025CA2D7859BFE48 /* Pods_printinator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_printinator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80F0F0525E56CB70001D70E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C80F0F0725E56CB70001D70E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C80F0F0925E56CBD0001D70E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -23,6 +32,11 @@
 		C80F0F4325E56D410001D70E /* FormLabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLabs.swift; sourceTree = "<group>"; };
 		C80F0F4E25E576E70001D70E /* printinator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = printinator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80F0F5125E577AA0001D70E /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
+		C80F0F5E25E579F30001D70E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C80F0F6725E580200001D70E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		C80F0F6A25E58FAD0001D70E /* FormLabsTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLabsTypes.swift; sourceTree = "<group>"; };
+		C80F0F6D25E5A0B70001D70E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C80F0F7025E5C6580001D70E /* PrinterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +44,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				485C9D519C7B55B2758E18BA /* Pods_printinator.framework in Frameworks */,
+				C80F0F5F25E579F30001D70E /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C499BA5CB67922D0163C10C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C80F0F5E25E579F30001D70E /* Alamofire.framework */,
+				C4914C81025CA2D7859BFE48 /* Pods_printinator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C80F0EF925E56CB70001D70E = {
 			isa = PBXGroup;
 			children = (
 				C80F0F0425E56CB70001D70E /* printinator */,
 				C80F0F4E25E576E70001D70E /* printinator.app */,
+				F92902895AE13393A84D5E94 /* Pods */,
+				C499BA5CB67922D0163C10C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,11 +78,24 @@
 				C80F0F0525E56CB70001D70E /* AppDelegate.swift */,
 				C80F0F0725E56CB70001D70E /* ContentView.swift */,
 				C80F0F4325E56D410001D70E /* FormLabs.swift */,
+				C80F0F6A25E58FAD0001D70E /* FormLabsTypes.swift */,
+				C80F0F6D25E5A0B70001D70E /* SettingsView.swift */,
+				C80F0F7025E5C6580001D70E /* PrinterView.swift */,
+				C80F0F6725E580200001D70E /* UserDefaults.swift */,
 				C80F0F0925E56CBD0001D70E /* Assets.xcassets */,
 				C80F0F1125E56CBD0001D70E /* Info.plist */,
 				C80F0F1225E56CBD0001D70E /* printinator.entitlements */,
 			);
 			path = printinator;
+			sourceTree = "<group>";
+		};
+		F92902895AE13393A84D5E94 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5072FF87C618425B08C95C53 /* Pods-printinator.debug.xcconfig */,
+				BD76A245F847AF5C5D372B8D /* Pods-printinator.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,9 +105,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C80F0F2B25E56CBD0001D70E /* Build configuration list for PBXNativeTarget "printinator" */;
 			buildPhases = (
+				3DA66BF2BD827562B28E551E /* [CP] Check Pods Manifest.lock */,
 				C80F0EFE25E56CB70001D70E /* Sources */,
 				C80F0EFF25E56CB70001D70E /* Frameworks */,
 				C80F0F0025E56CB70001D70E /* Resources */,
+				C1E01A38E9D494953FD78CA0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,14 +164,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3DA66BF2BD827562B28E551E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-printinator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1E01A38E9D494953FD78CA0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-printinator/Pods-printinator-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-printinator/Pods-printinator-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-printinator/Pods-printinator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C80F0EFE25E56CB70001D70E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C80F0F6B25E58FAD0001D70E /* FormLabsTypes.swift in Sources */,
+				C80F0F6825E580200001D70E /* UserDefaults.swift in Sources */,
 				C80F0F0825E56CB70001D70E /* ContentView.swift in Sources */,
+				C80F0F6E25E5A0B70001D70E /* SettingsView.swift in Sources */,
 				C80F0F4425E56D410001D70E /* FormLabs.swift in Sources */,
 				C80F0F0625E56CB70001D70E /* AppDelegate.swift in Sources */,
+				C80F0F7125E5C6580001D70E /* PrinterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,10 +341,12 @@
 		};
 		C80F0F2C25E56CBD0001D70E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5072FF87C618425B08C95C53 /* Pods-printinator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = printinator/printinator.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"printinator/Preview Content\"";
@@ -275,10 +365,12 @@
 		};
 		C80F0F2D25E56CBD0001D70E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD76A245F847AF5C5D372B8D /* Pods-printinator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = printinator/printinator.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"printinator/Preview Content\"";
