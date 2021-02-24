@@ -35,8 +35,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.frame = NSRect(x: 0, y: 0, width: 20, height: NSStatusBar.system.thickness)
         }
         
+        // Get our oauth credentials.
+        let oAuthCredentials = getOAuthCredentials()
+        
         // Initialize FormLabs.
-        let formLabs = FormLabs.init(self)
+        let formLabs = FormLabs.init(
+            clientID: oAuthCredentials!.formlabsClientID,
+            clientSecret: oAuthCredentials!.formlabsClientSecret
+        )
         
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView(formLabs: formLabs)

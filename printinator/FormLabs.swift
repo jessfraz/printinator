@@ -12,9 +12,8 @@ import Foundation
 let FormLabsAPIURI = "https://api.formlabs.com/developer/v1"
 
 class FormLabs: ObservableObject {
-    var appDelegate : AppDelegate
-    let clientID = "{STICK YOUR CLIENT ID HERE}"
-    let clientSecret = "{STICK YOUR CLIENT SECRET HERE}"
+    var clientID: String
+    var clientSecret: String
     
     var username: String = UserDefaults.standard.username
     var password: String = UserDefaults.standard.password
@@ -42,10 +41,11 @@ class FormLabs: ObservableObject {
     
     private var cancelableUsername: AnyCancellable?
     private var cancelablePassword: AnyCancellable?
-    init(_ appd: AppDelegate) {
-        self.appDelegate = appd
+    init(clientID: String, clientSecret: String) {
+        self.clientID = clientID
+        self.clientSecret = clientSecret
         
-        syncPrinters()
+        self.syncPrinters()
         
         _ = Timer.scheduledTimer(
             timeInterval: 60.0, target: self,
