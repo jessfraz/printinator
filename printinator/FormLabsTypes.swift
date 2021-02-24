@@ -301,6 +301,32 @@ extension Date {
         formatter.maximumUnitCount = 1
         return String(format: formatter.string(from: self, to: Date()) ?? "", locale: .current)
     }
+    
+    func dayString() -> String {
+        let calendar = Calendar.current
+        let startOfNow = calendar.startOfDay(for: Date())
+        let startOfTimeStamp = calendar.startOfDay(for: self)
+        let components = calendar.dateComponents([.day], from: startOfNow, to: startOfTimeStamp)
+        let day = components.day!
+        if abs(day) < 2 {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .none
+            formatter.doesRelativeDateFormatting = true
+            return formatter.string(from: self)
+        } else if day > 1 {
+            return "In \(day) days"
+        } else {
+            return "\(-day) days ago"
+        }
+    }
+    
+    func short() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return self.dayString() + " at " + formatter.string(from: self)
+    }
 }
 
 extension Int {
@@ -311,5 +337,26 @@ extension Int {
         formatter.zeroFormattingBehavior = .dropAll
         formatter.maximumUnitCount = 1
         return String(format: formatter.string(from: Date(), to: Date().addingTimeInterval(TimeInterval(self / 1000))) ?? "", locale: .current)
+    }
+}
+
+extension String {
+    func getStatusColor() -> Color {
+        switch self {
+        case "PRINTING":
+            return Color.blue
+        case "FINISHED":
+            return Color.green
+        case "SUCCESS":
+            return Color.green
+        case "IDLE":
+            return Color.yellow
+        case "UNKNOWN":
+            return Color.orange
+        case "FAILED":
+            return Color.red
+        default:
+            return Color.blue
+        }
     }
 }
