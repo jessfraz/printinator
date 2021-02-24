@@ -25,12 +25,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the status item.
-        self.statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
+        self.statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.squareLength))
         if let button = self.statusBarItem.button {
-            button.action = #selector(togglePopover(_:))
+            let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(togglePopover))
+            button.addGestureRecognizer(clickGesture)
             let image = NSImage(named: "form3")!
             image.size = NSSizeFromString("14,18")
             button.image = image
+            button.frame = NSRect(x: 0, y: 0, width: 20, height: NSStatusBar.system.thickness)
         }
         
         // Initialize FormLabs.
@@ -50,6 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func togglePopover(_ sender: AnyObject?) {
+        print("clicked")
         if let button = self.statusBarItem.button {
             if self.popover.isShown {
                 self.popover.performClose(sender)
