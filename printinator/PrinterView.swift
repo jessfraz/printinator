@@ -29,7 +29,6 @@ struct PrinterView: View {
                         .foregroundColor(.blue)
                         .font(.system(size: 12, weight: .bold, design: .monospaced))
                         .padding(.bottom, 5)
-                    //Text(printer.printerStatus.lastPingedAt)
                     Text(String(format: "%.2f°C", printer.printerStatus.currentTemperature))
                         .font(.system(size: 10, weight: .regular, design: .monospaced))
                 }
@@ -99,7 +98,7 @@ struct PrintRunView: View {
                         .padding(.top, 5)
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.yellow))
                    
-                    Text(printRun.printStartedAt.timeAgo() + " remain")
+                    Text(printRun.estimatedTimeRemainingMS.timeUntil() + " remain")
                         .font(.system(size: 10, weight: .regular, design: .monospaced))
                         .frame(width: 116, alignment: .trailing)
                     

@@ -45,10 +45,13 @@ class FormLabs: ObservableObject {
     init(_ appd: AppDelegate) {
         self.appDelegate = appd
         
-        if !self.password.isEmpty && !self.username.isEmpty {
-            // Only get the printers if we have a username and password.
-            self.getPrinters()
-        }
+        syncPrinters()
+        
+        _ = Timer.scheduledTimer(
+            timeInterval: 60.0, target: self,
+            selector: #selector(self.syncPrinters),
+            userInfo: nil,
+            repeats: true)
         
         // Listen for changes to username, we need to do this
         // because the SettingsView changes username.
@@ -177,6 +180,13 @@ class FormLabs: ObservableObject {
                     print("revoking token failed", error)
                 }
             }
+    }
+    
+    @objc func syncPrinters() {
+        if !self.password.isEmpty && !self.username.isEmpty {
+            // Only get the printers if we have a username and password.
+            self.getPrinters()
+        }
     }
     
     func getPrinters() {

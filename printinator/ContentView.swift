@@ -14,7 +14,14 @@ struct ContentView: View {
         if !formLabs.token.isEmpty {
             Section {
                 List(formLabs.printers, id: \.serial) { printer in
-                    PrinterView(printer: printer)
+                    VStack {
+                        PrinterView(printer: printer)
+                    
+                        Text("last ping " + printer.printerStatus.lastPingedAt.timeAgo() + " ago")
+                            .font(.system(size: 10, weight: .regular, design: .monospaced))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 280, height: 10, alignment: .trailing)
+                    }
                 }
                 .listStyle(SidebarListStyle())
                 .frame(width: 350, height: (270 * CGFloat(formLabs.printers.count)) + 26, alignment: .topLeading)
