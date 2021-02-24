@@ -175,6 +175,7 @@ class FormLabs: ObservableObject {
                 switch response.result {
                 case .success:
                     self.token = ""
+                    self.printers = [Printer]()
                     print("token revoked")
                 case let .failure(error):
                     print("revoking token failed", error)

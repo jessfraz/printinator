@@ -35,31 +35,22 @@ struct SettingsMenuView: View {
                     Text("Settings")
                         .font(.title)
                     Section(header: Text("FORMLABS")) {
-                        TextField("Enter your username", text: $usernameInput, onCommit: {
+                        EditableTextField(placeholder: "Enter your username", text: $usernameInput, onCommit: {
                             self.formLabs.username = self.usernameInput
                             self.username = self.usernameInput
                         })
-                        .disableAutocorrection(true)
-                        .focusable()
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .font(.system(size: 12, weight: .medium, design: .monospaced))
                         
-                        // TODO: enable pasting into thing field.
-                        TextField("Enter your password", text: $passwordInput, onCommit: {
+                        EditableSecureTextField(placeholder: "Enter your password", text: $passwordInput, onCommit: {
                             self.formLabs.password = self.passwordInput
                             self.password = self.passwordInput
                             
                             // Revoke our token just in case.
                             self.formLabs.revokeToken()
                             
-                            if !self.passwordInput.isEmpty {
+                            if !self.password.isEmpty {
                                 self.formLabs.getPrinters()
                             }
                         })
-                        .disableAutocorrection(true)
-                        .focusable()
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .font(.system(size: 12, weight: .medium, design: .monospaced))
                     }
                     .padding(.top, 10)
                 }
@@ -79,12 +70,10 @@ struct SettingsMenuView: View {
     }
     
     func logout() {
-        // Nullify the username and password, as well as the printers.
+        // Nullify the password and revoke the token.
         self.password = ""
-        self.formLabs.printers = [Printer]()
         
         self.formLabs.revokeToken()
-        
     }
     
     func quit() {
