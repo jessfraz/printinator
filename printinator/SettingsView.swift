@@ -36,6 +36,7 @@ struct SettingsMenuView: View {
                         .font(.title)
                     Section(header: Text("FORMLABS")) {
                         TextField("Enter your username", text: $usernameInput, onCommit: {
+                            self.formLabs.username = self.usernameInput
                             self.username = self.usernameInput
                         })
                         .disableAutocorrection(true)
@@ -45,7 +46,15 @@ struct SettingsMenuView: View {
                         
                         // TODO: enable pasting into thing field.
                         TextField("Enter your password", text: $passwordInput, onCommit: {
+                            self.formLabs.password = self.passwordInput
                             self.password = self.passwordInput
+                            
+                            // Revoke our token just in case.
+                            self.formLabs.revokeToken()
+                            
+                            if !self.passwordInput.isEmpty {
+                                self.formLabs.getPrinters()
+                            }
                         })
                         .disableAutocorrection(true)
                         .focusable()
@@ -70,10 +79,12 @@ struct SettingsMenuView: View {
     }
     
     func logout() {
-        // Nullify the username and password.
-        UserDefaults.standard.username = ""
-        UserDefaults.standard.password = ""
-        formLabs.revokeToken()
+        // Nullify the username and password, as well as the printers.
+        self.password = ""
+        self.formLabs.printers = [Printer]()
+        
+        self.formLabs.revokeToken()
+        
     }
     
     func quit() {

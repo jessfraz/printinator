@@ -11,7 +11,7 @@ struct ContentView: View {
     @ObservedObject var formLabs: FormLabs
     
     var body: some View {
-        if !formLabs.token.isEmpty {
+        if !formLabs.token.isEmpty && !formLabs.username.isEmpty {
             Section {
                 List(formLabs.printers, id: \.serial) { printer in
                     VStack {

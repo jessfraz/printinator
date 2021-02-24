@@ -18,7 +18,7 @@ class FormLabs: ObservableObject {
     
     var username: String = UserDefaults.standard.username
     var password: String = UserDefaults.standard.password
-    var token: String = UserDefaults.standard.token {
+    @Published var token: String = UserDefaults.standard.token {
         didSet {
             // Update UserDefaults whenever our local value for token is updated.
             UserDefaults.standard.token = token
@@ -56,10 +56,6 @@ class FormLabs: ObservableObject {
         // Listen for changes to username, we need to do this
         // because the SettingsView changes username.
         cancelableUsername = UserDefaults.standard.publisher(for: \.username)
-            // Wait for a pause in the delivery of events from the upstream publisher.
-            // Only receive elements when the user pauses or stops typing.
-            // When they start typing again, the debounce holds event delivery until the next pause.
-            .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .sink(receiveValue: { [weak self] newValue in
                 guard let self = self else { return }
                 if newValue != self.username { // avoid cycling !!
@@ -70,15 +66,14 @@ class FormLabs: ObservableObject {
         // Listen for changes to password, we need to do this
         // because the SettingsView changes password.
         cancelablePassword = UserDefaults.standard.publisher(for: \.password)
-            // Wait for a pause in the delivery of events from the upstream publisher.
-            // Only receive elements when the user pauses or stops typing.
-            // When they start typing again, the debounce holds event delivery until the next pause.
-            .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .sink(receiveValue: { [weak self] newValue in
                 guard let self = self else { return }
                 if newValue != self.password { // avoid cycling !!
                     self.password = newValue
-                    self.token = ""
+                    
+                    // Revoke our token just in case.
+                    self.revokeToken()
+                    
                     self.refreshToken = ""
                     if !self.password.isEmpty && !self.username.isEmpty {
                         // Only get the printers if we have a username and password.
@@ -118,6 +113,11 @@ class FormLabs: ObservableObject {
             // If we have a current token, let's revoke it first.
             if !self.token.isEmpty {
                 self.revokeToken()
+            }
+            
+            if self.password.isEmpty {
+                // Return early, we don't have a password.
+                return
             }
             
             // Set the parameters for a grant from their password.
@@ -192,6 +192,11 @@ class FormLabs: ObservableObject {
     func getPrinters() {
         self.ensureValidToken()
         
+        if self.token.isEmpty {
+            // Return early since we don't have a token.
+            return
+        }
+        
         AF.request(FormLabsAPIURI + "/printers/", method: .get,
                    headers: [
                     .authorization(bearerToken: self.token)
@@ -203,7 +208,6 @@ class FormLabs: ObservableObject {
                 case .success:
                     if let data = response.value {
                         self.printers = data
-                        print(self.printers)
                     } else {
                         print("getting the value for printers failed")
                     }
