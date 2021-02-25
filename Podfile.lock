@@ -1,16 +1,31 @@
 PODS:
   - Alamofire (5.4.1)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - SwiftJSONRPC (0.8.0):
+    - Alamofire (~> 5.1)
+    - PromiseKit (~> 6.13)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - SwiftJSONRPC
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - PromiseKit
+    - SwiftJSONRPC
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
+  SwiftJSONRPC: be42e672f29f5fc385d176da746054c56cc49211
 
-PODFILE CHECKSUM: 3c85934a9044bfb4869711dda38d0bc7afe1574f
+PODFILE CHECKSUM: 6af90f79524a9283c38fad6da4e6fda98596e489
 
 COCOAPODS: 1.10.1

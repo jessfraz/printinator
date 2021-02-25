@@ -34,4 +34,9 @@ extension UserDefaults {
         get { string(forKey: "password") ?? "" }
         set { setValue(newValue, forKey: "password") }
     }
+    
+    @objc dynamic var makerbotPrinterIPs: [String] {
+        get { (object(forKey: "makerbotPrinterIPs") as? [String]) ?? [String]() }
+        set { setValue(newValue, forKey: "makerbotPrinterIPs") }
+    }
 }

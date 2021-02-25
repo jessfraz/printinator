@@ -55,49 +55,53 @@ struct PrintRunView: View {
     var printRun: PrintRun
     
     var body: some View {
-        HStack(alignment: .center, spacing: 0) {
-            HStack(alignment: .center, spacing: 10) {
-                Image(nsImage: printRun.thumbnail())
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 116, alignment: .leading)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .center, spacing: 0) {
+                HStack(alignment: .center, spacing: 10) {
+                    Image(nsImage: printRun.thumbnail())
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 116, alignment: .leading)
                     
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(printRun.name)
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(printRun.name)
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
             
-                    HStack {
-                        Text(printRun.materialName)
-                            .frame(height: 19, alignment: .bottom)
-                            .font(.system(size: 12, weight: .regular, design: .rounded))
-                        printRun.droplet()
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 13, height: 17, alignment: .top)
+                        HStack {
+                            Text(printRun.materialName)
+                                .frame(height: 19, alignment: .bottom)
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                            printRun.droplet()
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 13, height: 17, alignment: .top)
+                        }
+                    }
+                }
+                .frame(width: 200, height: 116, alignment: .leading)
+                .padding(.trailing, 0)
+            
+                VStack(alignment: .trailing, spacing: 5) {
+                    PrintStatusView(status: printRun.status, runSuccess: printRun.printRunSuccess?.printRunSuccess ?? "")
+                        .frame(width: 116, alignment: .trailing)
+                    if printRun.printFinishedAt != nil {
+                        Text(printRun.printFinishedAt!.timeAgo() + " ago")
+                            .font(.system(size: 10, weight: .regular, design: .monospaced))
+                            .frame(width: 116, alignment: .trailing)
+                    }
+                
+                    if printRun.status == "PRINTING" {
+                        Text(printRun.estimatedTimeRemainingMS.timeUntil() + " remain")
+                            .font(.system(size: 10, weight: .regular, design: .monospaced))
+                            .frame(width: 116, alignment: .trailing)
                     }
                 }
             }
-            .frame(width: 200, height: 116, alignment: .leading)
-            .padding(.trailing, 0)
+            .frame(width: 350, height: 100, alignment: .leading)
             
-            VStack(alignment: .trailing, spacing: 5) {
-                PrintStatusView(status: printRun.status, runSuccess: printRun.printRunSuccess?.printRunSuccess ?? "")
-                if printRun.printRunSuccess != nil {
-                    Text(printRun.printFinishedAt!.timeAgo() + " ago")
-                        .font(.system(size: 10, weight: .regular, design: .monospaced))
-                        .frame(width: 116, alignment: .trailing)
-                } else if printRun.status == "PRINTING" {
-                    Text(printRun.estimatedTimeRemainingMS.timeUntil() + " remain")
-                        .font(.system(size: 10, weight: .regular, design: .monospaced))
-                        .frame(width: 116, alignment: .trailing)
-                    
-                    ProgressView(value: printRun.progress())
-                        .padding(.top, 5)
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.blue))
-                } else {
-                    // The print failed or was aborted...?
-                    // TODO: handle this mode.
-                }
+            if printRun.status == "PRINTING" {
+                ProgressView(value: printRun.progress())
+                    .frame(width: 318, alignment: .leading)
             }
         }
         .frame(width: 350, height: 100, alignment: .leading)

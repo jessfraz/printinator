@@ -23,6 +23,8 @@
 		C80F0F9525E6E7040001D70E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F9425E6E7040001D70E /* LoadingView.swift */; };
 		C80F0F9A25E707C60001D70E /* OAuthCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = C80F0F9925E707C60001D70E /* OAuthCredentials.plist */; };
 		C80F0F9D25E7087A0001D70E /* OAuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F9C25E7087A0001D70E /* OAuthCredentials.swift */; };
+		C80F0FA625E7117F0001D70E /* Makerbot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FA525E7117F0001D70E /* Makerbot.swift */; };
+		C80F0FAD25E722C40001D70E /* MakerbotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FAC25E722C40001D70E /* MakerbotService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		C80F0F9425E6E7040001D70E /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C80F0F9925E707C60001D70E /* OAuthCredentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthCredentials.plist; sourceTree = "<group>"; };
 		C80F0F9C25E7087A0001D70E /* OAuthCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCredentials.swift; sourceTree = "<group>"; };
+		C80F0FA525E7117F0001D70E /* Makerbot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Makerbot.swift; sourceTree = "<group>"; };
+		C80F0FAC25E722C40001D70E /* MakerbotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerbotService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 				C80F0F0525E56CB70001D70E /* AppDelegate.swift */,
 				C80F0F0725E56CB70001D70E /* ContentView.swift */,
 				C80F0F4325E56D410001D70E /* FormLabs.swift */,
+				C80F0FA525E7117F0001D70E /* Makerbot.swift */,
+				C80F0FAC25E722C40001D70E /* MakerbotService.swift */,
 				C80F0F6A25E58FAD0001D70E /* FormLabsTypes.swift */,
 				C80F0F6D25E5A0B70001D70E /* SettingsView.swift */,
 				C80F0F7025E5C6580001D70E /* PrinterView.swift */,
@@ -230,6 +236,7 @@
 				C80F0F6B25E58FAD0001D70E /* FormLabsTypes.swift in Sources */,
 				C80F0F6825E580200001D70E /* UserDefaults.swift in Sources */,
 				C80F0F9225E6E4350001D70E /* EditableSecureTextField.swift in Sources */,
+				C80F0FAD25E722C40001D70E /* MakerbotService.swift in Sources */,
 				C80F0F9525E6E7040001D70E /* LoadingView.swift in Sources */,
 				C80F0F0825E56CB70001D70E /* ContentView.swift in Sources */,
 				C80F0F9D25E7087A0001D70E /* OAuthCredentials.swift in Sources */,
@@ -237,6 +244,7 @@
 				C80F0F4425E56D410001D70E /* FormLabs.swift in Sources */,
 				C80F0F8925E6DD440001D70E /* EditableTextField.swift in Sources */,
 				C80F0F0625E56CB70001D70E /* AppDelegate.swift in Sources */,
+				C80F0FA625E7117F0001D70E /* Makerbot.swift in Sources */,
 				C80F0F7125E5C6580001D70E /* PrinterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +379,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"printinator/Preview Content\"";
 				DEVELOPMENT_TEAM = H5YXY2V89D;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = printinator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -396,6 +405,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"printinator/Preview Content\"";
 				DEVELOPMENT_TEAM = H5YXY2V89D;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = printinator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

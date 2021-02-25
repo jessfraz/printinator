@@ -210,11 +210,14 @@ extension PrintRun {
     // Return the droplet image for the material used.
     func droplet() -> Image {
         var droplet = "color_droplet"
+        let material = self.materialName.lowercased()
         
-        if self.materialName == "Draft V1" {
+        if material.contains("draft") {
             droplet = "draft_droplet"
-        } else if self.materialName == "Clear V1" {
+        } else if material.contains("clear") {
             droplet = "clear_droplet"
+        } else if material.contains("black") {
+            droplet = "black_droplet"
         }
         
         return Image(droplet)
@@ -351,6 +354,8 @@ extension String {
             return Color.green
         case "IDLE":
             return Color.yellow
+        case "ABORTED":
+            return Color.red
         case "UNKNOWN":
             return Color.orange
         case "FAILED":

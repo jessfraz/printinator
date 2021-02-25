@@ -18,9 +18,10 @@ struct ContentView: View {
                         VStack {
                             PrinterView(printer: printer)
                         }
+                        .frame(width: 350, height: 310, alignment: .topLeading)
                     }
                     .listStyle(SidebarListStyle())
-                    .frame(width: 350, height: (260 * CGFloat(formLabs.printers.count)) + 50, alignment: .topLeading)
+                    .frame(width: 350, height: (310 * CGFloat(formLabs.printers.count)), alignment: .topLeading)
                 }
             } else {
                 Section {
