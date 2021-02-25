@@ -38,15 +38,19 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
             let (ip, port) = printerIP.getIPAndPort()
             let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
             let client = TCPClient(group: eventLoopGroup, config: TCPClient.Config(framing: .brute))
-            /*_ = try! client.connect(host: ip, port: port).wait()
-            
-            switch try! client.call(method: "handshake", params: .none).wait() {
-                case .failure(let error):
-                    fatalError("handshake failed with \(error)")
-                case .success(let response):
-                    let printer = MakerbotPrinter(response)
-                    print("printer", printer!)
-                }*/
+            // Try to connect.
+            do {
+                let _ = try client.connect(host: ip, port: port).wait()
+                switch try! client.call(method: "handshake", params: .none).wait() {
+                    case .failure(let error):
+                        fatalError("handshake failed with \(error)")
+                    case .success(let response):
+                        let printer = MakerbotPrinter(response)
+                        print("printer", printer!)
+                }
+            } catch {
+                print("could not connect to printer", printerIP)
+            }
         }
         
         // Listen for changes to printerIPs, we need to do this

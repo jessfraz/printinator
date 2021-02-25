@@ -40,7 +40,7 @@ struct PrinterView: View {
             .padding(.bottom, 20)
             .padding(.top, 5)
             
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .top, spacing: 0) {
                 PrinterCartridgeView(cartridgeStatus: printer.cartridgeStatus)
             
                 PrinterTankView(tankStatus: printer.tankStatus)
@@ -141,19 +141,22 @@ struct PrinterCartridgeView: View {
     var cartridgeStatus: CartridgeStatus
     
     var body: some View {
-        HStack(alignment: .center, spacing: 0) {
-            cartridgeStatus.cartridge.material.getMaterialName().droplet()
-                .resizable()
-                .scaledToFit()
-                .frame(height: 40, alignment: .leading)
-                .padding(.trailing, 10)
-                
-            VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 5) {
+            HStack(alignment: .center, spacing: 0) {
+                cartridgeStatus.cartridge.material.getMaterialName().droplet()
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 14, alignment: .leading)
+                    .padding(.trailing, 10)
                 Text(cartridgeStatus.cartridge.material.getMaterialName())
                     .font(.system(size: 14, weight: .medium, design: .rounded))
-                Text(cartridgeStatus.cartridge.materialRemaining())
-                    .font(.system(size: 10, weight: .regular, design: .monospaced))
             }
+                
+            Text(cartridgeStatus.cartridge.materialRemaining())
+                    .font(.system(size: 10, weight: .regular, design: .monospaced))
+            /*Text("updated " + cartridgeStatus.cartridge.createdAt.short().lowercased())
+                .font(.system(size: 9, weight: .regular, design: .monospaced))
+                .foregroundColor(Color.gray)*/
         }
         .frame(width: 155, alignment: .leading)
         .padding(.trailing, 10)
@@ -164,24 +167,25 @@ struct PrinterTankView: View {
     var tankStatus: TankStatus
     
     var body: some View {
-        HStack(alignment: .center, spacing: 0) {
-            /*cartridgeStatus.cartridge.material.getMaterialName().droplet()
-                .resizable()
-                .scaledToFit()
-                .frame(height: 40, alignment: .leading)
-                .padding(.trailing, 10)*/
+        VStack(alignment: .trailing, spacing: 5) {
+            HStack(alignment: .center, spacing: 0) {
+                Image("tank")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 14, alignment: .leading)
+                    .padding(.trailing, 10)
                 
-            VStack(alignment: .trailing, spacing: 5) {
                 Text(tankStatus.tank.tankType.getTankName())
                     .font(.system(size: 14, weight: .medium, design: .rounded))
-                Text(tankStatus.tank.layersStatus())
-                    .font(.system(size: 10, weight: .regular, design: .monospaced))
-                Text(tankStatus.tank.daysStatus())
-                    .font(.system(size: 10, weight: .regular, design: .monospaced))
-                Text("updated " + tankStatus.lastModified.short().lowercased())
-                    .font(.system(size: 9, weight: .regular, design: .monospaced))
-                    .foregroundColor(Color.gray)
             }
+                
+            Text(tankStatus.tank.layersStatus())
+                .font(.system(size: 10, weight: .regular, design: .monospaced))
+            Text(tankStatus.tank.daysStatus())
+                .font(.system(size: 10, weight: .regular, design: .monospaced))
+            Text("updated " + tankStatus.lastModified.short().lowercased())
+                .font(.system(size: 9, weight: .regular, design: .monospaced))
+                .foregroundColor(Color.gray)
         }
         .frame(width: 165, alignment: .trailing)
     }
