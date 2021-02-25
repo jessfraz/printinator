@@ -9,19 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var formLabs: FormLabs
+    @ObservedObject var makerbot: Makerbot
     
     var body: some View {
         if !formLabs.token.isEmpty && !formLabs.username.isEmpty {
             if formLabs.printers.count > 0 {
                 Section {
-                    List(formLabs.printers, id: \.serial) { printer in
-                        VStack {
-                            PrinterView(printer: printer)
+                    ScrollView(.vertical, showsIndicators: false) {
+                        ForEach(formLabs.printers, id: \.serial) { printer in
+                            VStack {
+                                PrinterView(printer: printer)
+                            }
+                            .frame(width: 350, alignment: .topLeading)
                         }
-                        .frame(width: 350, height: 310, alignment: .topLeading)
+                        .padding(10)
                     }
-                    .listStyle(SidebarListStyle())
-                    .frame(width: 350, height: (310 * CGFloat(formLabs.printers.count)), alignment: .topLeading)
+                    .frame(width: 350, height: (430 * CGFloat(formLabs.printers.count)), alignment: .topLeading)
                 }
             } else {
                 Section {

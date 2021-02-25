@@ -82,6 +82,13 @@ struct Cartridge: Codable {
     }
 }
 
+extension Cartridge {
+    func materialRemaining() -> String {
+        let remaining = Double(initialVolumeMl) - volumeDispensedMl
+        return String(format: "%.2f ml remain", remaining)
+    }
+}
+
 struct PrinterStatus: Codable {
     let currentPrintRun: PrintRun?
     let status: String
@@ -132,6 +139,23 @@ struct Tank: Codable {
         case createdAt = "created_at"
         case firstFillDate = "first_fill_date"
         case lastPrintDate = "last_print_date"
+    }
+}
+
+extension Tank {
+    func layersStatus() -> String {
+        // Tanks last for 75000 layers.
+        let maxLayers = 75000
+        
+        return String(format: "%d / %d layers", self.layersPrinted, maxLayers)
+    }
+    
+    func daysStatus() -> String {
+        // Tanks last for 250 days.
+        let maxDays = 250
+        let diffInDays = Calendar.current.dateComponents([.day], from: self.createdAt, to: Date()).day
+        
+        return String(format: "%d / %d days used", diffInDays!, maxDays)
     }
 }
 
@@ -209,18 +233,7 @@ extension PrintRun {
     
     // Return the droplet image for the material used.
     func droplet() -> Image {
-        var droplet = "color_droplet"
-        let material = self.materialName.lowercased()
-        
-        if material.contains("draft") {
-            droplet = "draft_droplet"
-        } else if material.contains("clear") {
-            droplet = "clear_droplet"
-        } else if material.contains("black") {
-            droplet = "black_droplet"
-        }
-        
-        return Image(droplet)
+        return self.materialName.droplet()
     }
 }
 
@@ -363,5 +376,41 @@ extension String {
         default:
             return Color.blue
         }
+    }
+}
+
+extension String {
+    func getMaterialName() -> String {
+        switch self {
+        case "FLGPBK04":
+            return "Black V4"
+        default:
+            return "Color V1"
+        }
+    }
+    
+    func getTankName() -> String {
+        switch self {
+        case "TANK_TYPE_DAGUERRE_V2":
+            return "Tank V2"
+        default:
+            return "Tank V1"
+        }
+    }
+    
+    // Return the droplet image for the material used.
+    func droplet() -> Image {
+        var droplet = "color_droplet"
+        let material = self.lowercased()
+        
+        if material.contains("draft") {
+            droplet = "draft_droplet"
+        } else if material.contains("clear") {
+            droplet = "clear_droplet"
+        } else if material.contains("black") {
+            droplet = "black_droplet"
+        }
+        
+        return Image(droplet)
     }
 }

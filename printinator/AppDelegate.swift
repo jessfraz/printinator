@@ -44,8 +44,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             clientSecret: oAuthCredentials!.formlabsClientSecret
         )
         
+        // Initialize Makerbot.
+        let makerbot = Makerbot.init()
+        
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView(formLabs: formLabs)
+        let contentView = ContentView(formLabs: formLabs, makerbot: makerbot)
 
         // Create the popover
         let popover = NSPopover()

@@ -24,7 +24,10 @@
 		C80F0F9A25E707C60001D70E /* OAuthCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = C80F0F9925E707C60001D70E /* OAuthCredentials.plist */; };
 		C80F0F9D25E7087A0001D70E /* OAuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0F9C25E7087A0001D70E /* OAuthCredentials.swift */; };
 		C80F0FA625E7117F0001D70E /* Makerbot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FA525E7117F0001D70E /* Makerbot.swift */; };
-		C80F0FAD25E722C40001D70E /* MakerbotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FAC25E722C40001D70E /* MakerbotService.swift */; };
+		C80F0FAD25E722C40001D70E /* MakerbotTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FAC25E722C40001D70E /* MakerbotTypes.swift */; };
+		C80F0FB025E7516B0001D70E /* JSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FAF25E7516B0001D70E /* JSONRPCClient.swift */; };
+		C80F0FBC25E754710001D70E /* JSONRPCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FBB25E754710001D70E /* JSONRPCModel.swift */; };
+		C80F0FBF25E754900001D70E /* JSONRPCCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FBE25E754900001D70E /* JSONRPCCodec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +53,10 @@
 		C80F0F9925E707C60001D70E /* OAuthCredentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthCredentials.plist; sourceTree = "<group>"; };
 		C80F0F9C25E7087A0001D70E /* OAuthCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCredentials.swift; sourceTree = "<group>"; };
 		C80F0FA525E7117F0001D70E /* Makerbot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Makerbot.swift; sourceTree = "<group>"; };
-		C80F0FAC25E722C40001D70E /* MakerbotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerbotService.swift; sourceTree = "<group>"; };
+		C80F0FAC25E722C40001D70E /* MakerbotTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerbotTypes.swift; sourceTree = "<group>"; };
+		C80F0FAF25E7516B0001D70E /* JSONRPCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCClient.swift; sourceTree = "<group>"; };
+		C80F0FBB25E754710001D70E /* JSONRPCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCModel.swift; sourceTree = "<group>"; };
+		C80F0FBE25E754900001D70E /* JSONRPCCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCCodec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +96,13 @@
 			children = (
 				C80F0F5125E577AA0001D70E /* Preview Content */,
 				C80F0F0525E56CB70001D70E /* AppDelegate.swift */,
+				C80F0FAF25E7516B0001D70E /* JSONRPCClient.swift */,
+				C80F0FBB25E754710001D70E /* JSONRPCModel.swift */,
+				C80F0FBE25E754900001D70E /* JSONRPCCodec.swift */,
 				C80F0F0725E56CB70001D70E /* ContentView.swift */,
 				C80F0F4325E56D410001D70E /* FormLabs.swift */,
 				C80F0FA525E7117F0001D70E /* Makerbot.swift */,
-				C80F0FAC25E722C40001D70E /* MakerbotService.swift */,
+				C80F0FAC25E722C40001D70E /* MakerbotTypes.swift */,
 				C80F0F6A25E58FAD0001D70E /* FormLabsTypes.swift */,
 				C80F0F6D25E5A0B70001D70E /* SettingsView.swift */,
 				C80F0F7025E5C6580001D70E /* PrinterView.swift */,
@@ -236,15 +245,18 @@
 				C80F0F6B25E58FAD0001D70E /* FormLabsTypes.swift in Sources */,
 				C80F0F6825E580200001D70E /* UserDefaults.swift in Sources */,
 				C80F0F9225E6E4350001D70E /* EditableSecureTextField.swift in Sources */,
-				C80F0FAD25E722C40001D70E /* MakerbotService.swift in Sources */,
+				C80F0FAD25E722C40001D70E /* MakerbotTypes.swift in Sources */,
 				C80F0F9525E6E7040001D70E /* LoadingView.swift in Sources */,
 				C80F0F0825E56CB70001D70E /* ContentView.swift in Sources */,
+				C80F0FBC25E754710001D70E /* JSONRPCModel.swift in Sources */,
 				C80F0F9D25E7087A0001D70E /* OAuthCredentials.swift in Sources */,
 				C80F0F6E25E5A0B70001D70E /* SettingsView.swift in Sources */,
 				C80F0F4425E56D410001D70E /* FormLabs.swift in Sources */,
+				C80F0FBF25E754900001D70E /* JSONRPCCodec.swift in Sources */,
 				C80F0F8925E6DD440001D70E /* EditableTextField.swift in Sources */,
 				C80F0F0625E56CB70001D70E /* AppDelegate.swift in Sources */,
 				C80F0FA625E7117F0001D70E /* Makerbot.swift in Sources */,
+				C80F0FB025E7516B0001D70E /* JSONRPCClient.swift in Sources */,
 				C80F0F7125E5C6580001D70E /* PrinterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
