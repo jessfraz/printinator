@@ -56,10 +56,28 @@ struct MakerbotFirmwareVersion: Codable {
     let build: Int
 }
 
+struct MakerbotAuthResponse: Codable {
+    let answer: String?
+    let code: String?
+    let answerCode: String?
+    let accessToken: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case answer, code
+        case answerCode = "answer_code"
+        case accessToken = "access_token"
+    }
+}
+
 extension String {
     func getIPAndPort() -> (String, Int){
         let components = self.components(separatedBy: ":")
         return (components[0], Int(components[1]) ?? 9999)
+    }
+    
+    func getMakerbotAuthURL() -> String {
+        // Most of these listen on port 80 over http.
+        return "http://" + self + "/auth"
     }
 }
 
