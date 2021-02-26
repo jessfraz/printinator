@@ -49,8 +49,10 @@ extension Printer {
     func getIcon() -> String {
         var icon = "fuse1"
         let type = self.machineTypeID.lowercased()
-            
-        if type.contains("form-3") {
+           
+        if type.contains("form-3l") {
+            icon = "form3l"
+        } else if type.contains("form-3") {
             icon = "form3"
         }
             
