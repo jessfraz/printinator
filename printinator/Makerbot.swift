@@ -36,6 +36,8 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
         // Browse the network for printers.
         self.browseNetworkForPrinters()
         
+        print(self.printerIPs)
+        
         // Listen for changes to printerIPs, we need to do this
         // because the service discovery changes printerIPs.
         cancelablePrinterIPs = UserDefaults.standard.publisher(for: \.makerbotPrinterIPs)
@@ -159,26 +161,27 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
     }
     
     // Authenticate locally.
-    func authenticateLocally(_ printerIP: String, name: String) -> String {
+    func authenticateLocally(_ printerIP: String, port: String, name: String) {
         let answerCode = getAuthAnswerCode(printerIP)
         if answerCode.isEmpty {
             print("answer code from makerbot auth was empty")
-            return ""
+            return
         }
         
         let code = getAuthCode(printerIP, answerCode: answerCode)
         if code.isEmpty {
             print("code from makerbot auth was empty")
-            return ""
+            return
         }
         
         let token = getAuthToken(printerIP, code: code)
         if token.isEmpty {
             print("access token from makerbot auth was empty")
-            return ""
+            return
         }
         
-        return token
+        // Set the token in our map, if it is not empty.
+        self.printerIPs[printerIP + ":" + port] = token
     }
     
     func getAuthAnswerCode(_ printerIP: String) -> String {

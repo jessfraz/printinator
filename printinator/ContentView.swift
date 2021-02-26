@@ -48,7 +48,7 @@ struct ContentView: View {
                     }
                     .padding(10)
                 }
-                .frame(width: 350, height: (430 * CGFloat(makerbot.printers.count)), alignment: .topLeading)
+                .frame(width: 350, height: (100 * CGFloat(makerbot.printers.count)), alignment: .topLeading)
             }
         }
         
