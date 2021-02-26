@@ -28,12 +28,27 @@ struct ContentView: View {
                 }
             } else {
                 Section {
-                    Text("Fetching printers...")
+                    Text("Fetching formlabs printers...")
                         .font(.system(size: 14, weight: .regular, design: .monospaced))
                 
                     LoadingView()
                 }
                 .frame(width: 350, height: 50, alignment: .center)
+            }
+        }
+        
+        if makerbot.printers.count > 0 {
+            Section {
+                ScrollView(.vertical, showsIndicators: false) {
+                    ForEach(makerbot.printers, id: \.serial) { printer in
+                        VStack {
+                            MakerbotPrinterView(makerbot: makerbot, printer: printer)
+                        }
+                        .frame(width: 350, alignment: .topLeading)
+                    }
+                    .padding(10)
+                }
+                .frame(width: 350, height: (430 * CGFloat(makerbot.printers.count)), alignment: .topLeading)
             }
         }
         

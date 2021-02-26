@@ -17,7 +17,7 @@ struct PrinterView: View {
                     Image("form3")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 40, height: 52, alignment: .leading)
+                        .frame(height: 52, alignment: .leading)
                         .padding(.trailing, 10)
                     Text(printer.serial)
                         .font(.system(size: 16, weight: .medium, design: .rounded))

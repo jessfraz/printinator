@@ -34,6 +34,8 @@ struct MakerbotPrinter: Codable {
     let botType: String              // Codename for the bot type
     let port: String                 // JSON-RPC port (usually 9999)
     let firmwareVersion: MakerbotFirmwareVersion
+    var token: String?
+    var lastPingedAt: Date?
     
     enum CodingKeys: String, CodingKey {
         case machineType = "machine_type"
@@ -46,6 +48,8 @@ struct MakerbotPrinter: Codable {
         case botType = "bot_type"
         case port
         case firmwareVersion = "firmware_version"
+        case token
+        case lastPingedAt = "last_pinged_at"
     }
 }
 

@@ -26,6 +26,9 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
         }
     }
     
+    // Variables that publish items in the UI.
+    @Published var printers: [MakerbotPrinter] = [MakerbotPrinter]()
+    
     private var cancelablePrinterIPs: AnyCancellable?
     override init() {
         super.init()
@@ -36,21 +39,34 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
         // Listen for changes to printerIPs, we need to do this
         // because the service discovery changes printerIPs.
         cancelablePrinterIPs = UserDefaults.standard.publisher(for: \.makerbotPrinterIPs)
+            // Wait for a pause in the delivery of events from the upstream publisher.
+            // Only receive elements when the we haven't found a new printer in 5 seconds.
+            // This is in case we find a bunch on the network at one time.
+            .debounce(for: .seconds(5), scheduler: DispatchQueue.main)
             .sink(receiveValue: { [weak self] newValue in
                 guard let self = self else { return }
                 if newValue != self.printerIPs { // avoid cycling !!
                     self.printerIPs = newValue
+                
+                    // When the printers change, update our list of printers.
+                    // Get the printers as a background thread.
+                    DispatchQueue.global(qos: .background).async {
+                        self.getPrinters()
+                    }
                 }
             })
         
         // Get the printers as a background thread.
         DispatchQueue.global(qos: .background).async {
             self.getPrinters()
+            print(self.printers)
         }
     }
     
     
     func getPrinters() {
+        var refreshedPrinters = [MakerbotPrinter]()
+        
         // For each printer IP we want to create a client.
         for (printerIP, printerToken) in printerIPs {
             // Connect to the client.
@@ -60,36 +76,76 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
             // Try to connect.
             do {
                 let _ = try client.connect(host: ip, port: port).wait()
-                switch try! client.call(method: "handshake", params: .none).wait() {
+                switch try client.call(method: "handshake", params: .none).wait() {
                     case .failure(let error):
                         print("handshake failed with \(error)")
                     case .success(let response):
-                        let printer = MakerbotPrinter(response)
-                        print("printer", printer!)
+                        var printer = MakerbotPrinter(response)!
                         
-                        // If we do not have a token for the printer, we need to authenticate.
+                        // Set the token for the printer so the views know we authenticated it.
+                        printer.token = printerToken
+                        printer.lastPingedAt = Date()
+                        
+                        // Add the printer to our array of printers.
+                        refreshedPrinters.append(printer)
+                        
                         if printerToken.isEmpty {
-                            let token = authenticateLocally(ip, name: printer!.machineName)
-                            print("token", token)
-                            
-                            if !token.isEmpty {
-                                // Set the token in our map, if it is not empty.
-                                self.printerIPs[printerIP] = token
-                            }
+                            // Continue through the loop, since we aren't authenticated.
+                            continue
                         }
                 }
                 
-                
-                
-                /*switch try! client.call(method: "get_machine_config", params: .none).wait() {
+                // Send the authentication.
+                switch try client.call(method: "authenticate", params: RPCObject(["access_token": printerToken])).wait() {
                     case .failure(let error):
-                        print("get_machine_config failed with \(error)")
+                        print("authenticate failed with \(error)")
+                        // Reset the token and try again.
+                        self.printerIPs[printerIP] = ""
+                    case .success(let response):
+                        print("authenticated to", printerIP, response)
+                }
+                
+                // Get system information.
+                switch try client.call(method: "get_system_information", params: .none).wait() {
+                    case .failure(let error):
+                        print("get_system_information failed with \(error)")
                     case .success(let response):
                         print("response", response)
-                }*/
+                }
+                
+                // Get queue status.
+                switch try client.call(method: "get_queue_status", params: .none).wait() {
+                    case .failure(let error):
+                        print("get_queue_status failed with \(error)")
+                    case .success(let response):
+                        print("response", response)
+                }
+                
+                // Get print history.
+                switch try client.call(method: "get_print_history", params: .none).wait() {
+                    case .failure(let error):
+                        print("get_print_history failed with \(error)")
+                    case .success(let response):
+                        print("response", response)
+                }
+                
+                // Get statistics.
+                switch try client.call(method: "get_statistics", params: .none).wait() {
+                    case .failure(let error):
+                        print("get_statistics failed with \(error)")
+                    case .success(let response):
+                        print("response", response)
+                }
+                
+                // Disconnect.
+                try client.disconnect().wait()
             } catch {
                 print("could not connect to printer", printerIP)
             }
+        }
+        
+        DispatchQueue.main.async {
+            self.printers = refreshedPrinters
         }
     }
     

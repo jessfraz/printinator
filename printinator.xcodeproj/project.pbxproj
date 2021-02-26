@@ -28,6 +28,7 @@
 		C80F0FB025E7516B0001D70E /* JSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FAF25E7516B0001D70E /* JSONRPCClient.swift */; };
 		C80F0FBC25E754710001D70E /* JSONRPCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FBB25E754710001D70E /* JSONRPCModel.swift */; };
 		C80F0FBF25E754900001D70E /* JSONRPCCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FBE25E754900001D70E /* JSONRPCCodec.swift */; };
+		C80F0FC325E868140001D70E /* MakerbotPrinterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80F0FC225E868140001D70E /* MakerbotPrinterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		C80F0FAF25E7516B0001D70E /* JSONRPCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCClient.swift; sourceTree = "<group>"; };
 		C80F0FBB25E754710001D70E /* JSONRPCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCModel.swift; sourceTree = "<group>"; };
 		C80F0FBE25E754900001D70E /* JSONRPCCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRPCCodec.swift; sourceTree = "<group>"; };
+		C80F0FC225E868140001D70E /* MakerbotPrinterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerbotPrinterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				C80F0F6A25E58FAD0001D70E /* FormLabsTypes.swift */,
 				C80F0F6D25E5A0B70001D70E /* SettingsView.swift */,
 				C80F0F7025E5C6580001D70E /* PrinterView.swift */,
+				C80F0FC225E868140001D70E /* MakerbotPrinterView.swift */,
 				C80F0F9425E6E7040001D70E /* LoadingView.swift */,
 				C80F0F6725E580200001D70E /* UserDefaults.swift */,
 				C80F0F8825E6DD440001D70E /* EditableTextField.swift */,
@@ -252,6 +255,7 @@
 				C80F0F9D25E7087A0001D70E /* OAuthCredentials.swift in Sources */,
 				C80F0F6E25E5A0B70001D70E /* SettingsView.swift in Sources */,
 				C80F0F4425E56D410001D70E /* FormLabs.swift in Sources */,
+				C80F0FC325E868140001D70E /* MakerbotPrinterView.swift in Sources */,
 				C80F0FBF25E754900001D70E /* JSONRPCCodec.swift in Sources */,
 				C80F0F8925E6DD440001D70E /* EditableTextField.swift in Sources */,
 				C80F0F0625E56CB70001D70E /* AppDelegate.swift in Sources */,
