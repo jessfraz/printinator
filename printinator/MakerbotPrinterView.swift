@@ -76,14 +76,13 @@ struct MakerbotAuthPrinterView: View {
         alert.messageText = "Authenticate " + printer.machineName
 
         DispatchQueue.global(qos: .background).async {
-            let printerPort = printer.ip + ":" + printer.port
             
             // Authenticate the printer.
-            let printerToken = makerbot.authenticateLocally(printerPort, name: printer.machineName)
+            let printerToken = makerbot.authenticateLocally(printer.ip, name: printer.machineName)
             
             if !printerToken.isEmpty {
                 // Set the token in our map, if it is not empty.
-                UserDefaults.standard.makerbotPrinterIPs[printerPort] = printerToken
+                UserDefaults.standard.makerbotPrinterIPs[printer.ip + ":" + printer.port] = printerToken
             }
         }
             
