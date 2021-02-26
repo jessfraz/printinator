@@ -44,6 +44,20 @@ struct Printer: Codable {
     }
 }
 
+extension Printer {
+    // Get the icon string for the printer type.
+    func getIcon() -> String {
+        var icon = "fuse1"
+        let type = self.machineTypeID.lowercased()
+            
+        if type.contains("form-3") {
+            icon = "form3"
+        }
+            
+        return icon
+    }
+}
+
 struct CartridgeStatus: Codable {
     let cartridge: Cartridge
     let cartridgeSlot: String

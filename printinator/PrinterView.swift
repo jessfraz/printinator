@@ -14,7 +14,7 @@ struct PrinterView: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center, spacing: 0) {
                 HStack(alignment: .center, spacing: 0) {
-                    Image("form3")
+                    Image(printer.getIcon())
                         .resizable()
                         .scaledToFit()
                         .frame(height: 52, alignment: .leading)
