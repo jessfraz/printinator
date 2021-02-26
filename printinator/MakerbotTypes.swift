@@ -36,6 +36,7 @@ struct MakerbotPrinter: Codable {
     let firmwareVersion: MakerbotFirmwareVersion
     var token: String?
     var lastPingedAt: Date?
+    var systemInformation: MakerbotSystemInformation?
     
     enum CodingKeys: String, CodingKey {
         case machineType = "machine_type"
@@ -50,6 +51,7 @@ struct MakerbotPrinter: Codable {
         case firmwareVersion = "firmware_version"
         case token
         case lastPingedAt = "last_pinged_at"
+        case systemInformation = "system_information"
     }
 }
 
@@ -58,6 +60,74 @@ struct MakerbotFirmwareVersion: Codable {
     let minor: Int
     let bugfix: Int
     let build: Int
+}
+
+struct MakerbotSystemInformation: Codable {
+    init?(_ object: RPCObject) {
+        let data = getDataFromRPCObject(object)
+        
+        if data != nil {
+            // Parse the JSON.
+            // FIXME: actually check for errors here.
+            let json: MakerbotSystemInformation = try! JSONDecoder().decode(MakerbotSystemInformation.self, from: data!)
+            self = json
+            return
+        }
+        
+        return nil
+    }
+    
+    let currentProcess: JSONNull?
+    let ip: String                   // The local IP of this printer
+    let autoUnload: String
+    let firmwareVersion: MakerbotFirmwareVersion
+    let hasBeenConnectedTo: Bool
+    let machineType: String          // The codename for this machine type
+    let toolheads: MakerbotToolheads
+    let apiVersion: String           // API verison
+    let machineName: String          // User-defined printer name
+    let botType: String              // Codename for the bot type
+    let sound: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case currentProcess = "current_process"
+        case ip
+        case autoUnload = "auto_unload"
+        case firmwareVersion = "firmware_version"
+        case hasBeenConnectedTo = "has_been_connected_to"
+        case machineType = "machine_type"
+        case toolheads
+        case apiVersion = "api_version"
+        case machineName = "machine_name"
+        case botType = "bot_type"
+        case sound
+    }
+}
+
+struct MakerbotToolheads: Codable {
+    let extruder: [MakerbotToolhead]
+}
+
+struct MakerbotToolhead: Codable {
+    let toolPresent: Bool
+    let index: Int
+    let filamentPresence: Bool
+    let preheating: Bool
+    let targetTemperature: Int
+    let error: Int
+    let toolID: Int
+    let currentTemperature: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case toolPresent = "tool_present"
+        case index
+        case filamentPresence = "filament_presence"
+        case preheating
+        case targetTemperature = "target_temperature"
+        case error
+        case toolID = "tool_id"
+        case currentTemperature = "current_temperature"
+    }
 }
 
 struct MakerbotAuthResponse: Codable {

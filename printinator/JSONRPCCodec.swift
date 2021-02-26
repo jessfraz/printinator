@@ -191,7 +191,7 @@ internal final class BruteForceCodec<T>: ByteToMessageDecoder, MessageToByteEnco
         // try to confirm its a json payload by brute force decoding
         let length = buffer.readableBytes
         let b = buffer.getBytes(at: buffer.readerIndex, length: length)!
-        print(String(data: Data(b), encoding: .utf8))
+        //print(String(data: Data(b), encoding: .utf8))
         do {
             _ = try JSONDecoder().decode(T.self, from: Data(b))
         } catch is DecodingError {

@@ -36,8 +36,6 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
         // Browse the network for printers.
         self.browseNetworkForPrinters()
         
-        print(self.printerIPs)
-        
         // Listen for changes to printerIPs, we need to do this
         // because the service discovery changes printerIPs.
         cancelablePrinterIPs = UserDefaults.standard.publisher(for: \.makerbotPrinterIPs)
@@ -61,7 +59,6 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
         // Get the printers as a background thread.
         DispatchQueue.global(qos: .background).async {
             self.getPrinters()
-            print(self.printers)
         }
     }
     
@@ -75,6 +72,8 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
             let (ip, port) = printerIP.getIPAndPort()
             let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
             let client = TCPClient(group: eventLoopGroup, config: TCPClient.Config(framing: .brute))
+            var printer: MakerbotPrinter?
+            
             // Try to connect.
             do {
                 let _ = try client.connect(host: ip, port: port).wait()
@@ -82,16 +81,16 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
                     case .failure(let error):
                         print("handshake failed with \(error)")
                     case .success(let response):
-                        var printer = MakerbotPrinter(response)!
+                        printer = MakerbotPrinter(response)!
                         
                         // Set the token for the printer so the views know we authenticated it.
-                        printer.token = printerToken
-                        printer.lastPingedAt = Date()
-                        
-                        // Add the printer to our array of printers.
-                        refreshedPrinters.append(printer)
+                        printer?.token = printerToken
+                        printer?.lastPingedAt = Date()
                         
                         if printerToken.isEmpty {
+                            // Add the printer to our array of printers.
+                            refreshedPrinters.append(printer!)
+                            
                             // Continue through the loop, since we aren't authenticated.
                             continue
                         }
@@ -112,7 +111,10 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
                     case .failure(let error):
                         print("get_system_information failed with \(error)")
                     case .success(let response):
-                        print("response", response)
+                        let systemInformation = MakerbotSystemInformation(response)!
+                        printer?.systemInformation = systemInformation
+                        
+                        print(printer!)
                 }
                 
                 // Get queue status.
@@ -143,6 +145,13 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
                 try client.disconnect().wait()
             } catch {
                 print("could not connect to printer", printerIP)
+                // Remove the printer from the map.
+                // Don't worry it will be added back later if it is found on the network.
+                self.printerIPs.removeValue(forKey: printerIP)
+            }
+            
+            if printer != nil {
+                refreshedPrinters.append(printer!)
             }
         }
         
@@ -182,6 +191,9 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
         
         // Set the token in our map, if it is not empty.
         self.printerIPs[printerIP + ":" + port] = token
+        
+        // Update our printers.
+        self.getPrinters()
     }
     
     func getAuthAnswerCode(_ printerIP: String) -> String {
