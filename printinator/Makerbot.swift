@@ -101,7 +101,7 @@ class Makerbot: NSObject, ObservableObject, NetServiceBrowserDelegate {
                     case .failure(let error):
                         print("authenticate failed with \(error)")
                         // Reset the token and try again.
-                        self.printerIPs[printerIP] = ""
+                        // self.printerIPs[printerIP] = ""
                     case .success(let response):
                         print("authenticated to", printerIP, response)
                 }

@@ -75,7 +75,7 @@ struct PrintRunView: View {
                         .frame(height: 65, alignment: .leading)
                         .padding(0)
                 }
-                .frame(width: 190, alignment: .leading)
+                .frame(width: 170, alignment: .leading)
                 .padding(10)
             
                 VStack(alignment: .trailing, spacing: 5) {
@@ -98,7 +98,7 @@ struct PrintRunView: View {
                     
                     PrintMaterialView(printRun: printRun)
                 }
-                .frame(width: 100, alignment: .topTrailing)
+                .frame(width: 120, alignment: .topTrailing)
                 .padding(.trailing, 10)
                 .padding(.top, 10)
             }
