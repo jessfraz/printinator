@@ -47,11 +47,13 @@ struct Printer: Codable {
 extension Printer {
     // Get the icon string for the printer type.
     func getIcon() -> String {
-        var icon = "fuse1"
+        var icon = "fuse"
         let type = self.machineTypeID.lowercased()
            
         if type.contains("form-3l") {
             icon = "form3l"
+        } else if type.contains("form-3b") {
+            icon = "form3b"
         } else if type.contains("form-3") {
             icon = "form3"
         }
@@ -416,15 +418,107 @@ extension String {
     
     // Return the droplet image for the material used.
     func droplet() -> Image {
-        var droplet = "color_droplet"
+        var droplet = "droplet_color"
         let material = self.lowercased()
         
-        if material.contains("draft") {
-            droplet = "draft_droplet"
-        } else if material.contains("clear") {
-            droplet = "clear_droplet"
+        if material.contains("nylon") {
+            droplet = "powder_nylon"
+        } else if material.contains("draft v1") {
+            droplet = "droplet_draft_v1"
+        } else if material.contains("draft v2") {
+            droplet = "droplet_draft_v2"
+        } else if material.contains("biomed amber") {
+            droplet = "droplet_biomed_amber"
+        } else if material.contains("biomed clear") {
+            droplet = "droplet_biomed_clear"
         } else if material.contains("black") {
-            droplet = "black_droplet"
+            droplet = "droplet_black"
+        } else if material.contains("castable wax 40") {
+            droplet = "droplet_castable_wax_40_v1"
+        } else if material.contains("castable wax") {
+            droplet = "droplet_castable_wax_v1"
+        } else if material.contains("castable") {
+            droplet = "droplet_castable_v2"
+        } else if material.contains("ceramic") {
+            droplet = "droplet_ceramic"
+        } else if material.contains("clear") {
+            droplet = "droplet_clear"
+        } else if material.contains("custom tray") {
+            droplet = "droplet_custom_tray"
+        } else if material.contains("dental lt clear v1") {
+            droplet = "droplet_dental_lt_clear_v1"
+        } else if material.contains("dental lt clear") {
+            droplet = "droplet_dental_lt_clear_v2"
+        } else if material.contains("dental model") {
+            droplet = "droplet_dental_model_v1"
+        } else if material.contains("dental sg") {
+            droplet = "droplet_dental_sg_v1"
+        } else if material.contains("denture base dp") {
+            droplet = "droplet_denture_base_dp"
+        } else if material.contains("denture base lp") {
+            droplet = "droplet_denture_base_lp"
+        } else if material.contains("denture base op") {
+            droplet = "droplet_denture_base_op"
+        } else if material.contains("denture base") {
+            droplet = "droplet_denture_base_rp"
+        } else if material.contains("denture teeth a1") {
+            droplet = "droplet_denture_teeth_a1"
+        } else if material.contains("denture teeth a2") {
+            droplet = "droplet_denture_teeth_a2"
+        } else if material.contains("denture teeth a3.5") {
+            droplet = "droplet_denture_teeth_a3.5"
+        } else if material.contains("denture teeth a3") {
+            droplet = "droplet_denture_teeth_a3"
+        } else if material.contains("denture teeth b1") {
+            droplet = "droplet_denture_teeth_b1"
+        } else if material.contains("denture teeth") {
+            droplet = "droplet_denture_teeth_b2"
+        } else if material.contains("draft v1") {
+            droplet = "droplet_draft_v1"
+        } else if material.contains("draft") {
+            droplet = "droplet_draft_v2"
+        } else if material.contains("durable") {
+            droplet = "droplet_durable"
+        } else if material.contains("elastic") {
+            droplet = "droplet_elastic_v1"
+        } else if material.contains("flexible 80") {
+            droplet = "droplet_flexible_80a"
+        } else if material.contains("flexible") {
+            droplet = "droplet_flexible_v2"
+        } else if material.contains("grey pro") {
+            droplet = "droplet_grey_pro_v1"
+        } else if material.contains("grey") {
+            droplet = "droplet_grey_v3"
+        } else if material.contains("high temp v1") {
+            droplet = "droplet_high_temp_v1"
+        } else if material.contains("high temp") {
+            droplet = "droplet_high_temp_v2"
+        } else if material.contains("rigid 10k") {
+            droplet = "droplet_rigid_10k"
+        } else if material.contains("rigid") {
+            droplet = "droplet_rigid"
+        } else if material.contains("surgical") {
+            droplet = "droplet_surgical_guide"
+        } else if material.contains("temp cb a2") {
+            droplet = "droplet_temp_cb_a2"
+        } else if material.contains("temp cb a3") {
+            droplet = "droplet_temp_cb_a3"
+        } else if material.contains("temp cb b1") {
+            droplet = "droplet_temp_cb_b1"
+        } else if material.contains("temp cb c2") {
+            droplet = "droplet_temp_cb_c2"
+        } else if material.contains("tough 1500") {
+            droplet = "droplet_tough_1500_v1"
+        } else if material.contains("tough 1500") {
+            droplet = "droplet_tough_1500_v1"
+        } else if material.contains("tough 2000") {
+            droplet = "droplet_tough_2000_v1"
+        } else if material.contains("tough v4") {
+            droplet = "droplet_tough_v4"
+        } else if material.contains("tough") {
+            droplet = "droplet_tough_v5"
+        } else if material.contains("white") {
+            droplet = "droplet_white"
         }
         
         return Image(droplet)
