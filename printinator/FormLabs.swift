@@ -209,6 +209,7 @@ class FormLabs: ObservableObject {
                 case .success:
                     if let data = response.value {
                         self.printers = data
+                        print(data)
                     } else {
                         print("getting the value for printers failed")
                     }

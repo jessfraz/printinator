@@ -43,7 +43,9 @@ struct PrinterView: View {
             HStack(alignment: .top, spacing: 0) {
                 PrinterCartridgeView(cartridgeStatus: printer.cartridgeStatus)
             
-                PrinterTankView(tankStatus: printer.tankStatus)
+                if printer.tankStatus != nil {
+                    PrinterTankView(tankStatus: printer.tankStatus!)
+                }
             }
             .padding(.bottom, 20)
             

@@ -24,7 +24,7 @@ struct ContentView: View {
                         }
                         .padding(10)
                     }
-                    .frame(width: 350, height: (430 * CGFloat(formLabs.printers.count)), alignment: .topLeading)
+                    .frame(width: 350, height: (310 * CGFloat(formLabs.printers.count)), alignment: .topLeading)
                 }
             } else {
                 Section {

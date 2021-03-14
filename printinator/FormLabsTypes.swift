@@ -27,7 +27,7 @@ struct Printer: Codable {
     let totalPrintTimeMS, totalNumberOfPrints: Int
     let printerStatus: PrinterStatus
     let cartridgeStatus: CartridgeStatus
-    let tankStatus: TankStatus
+    let tankStatus: TankStatus?
     let group: String?
     let previousPrintRun: PrintRun?
 
@@ -140,7 +140,7 @@ struct Tank: Codable {
     let insidePrinter, tankType: String
     let heatmap, heatmapGif: JSONNull?
     let displayName, connectedGroup: String?
-    let firstFillDate: String // For some reason this one comes back in a different format.
+    let firstFillDate: String? // For some reason this one comes back in a different format.
     let createdAt, lastPrintDate: Date
 
     enum CodingKeys: String, CodingKey {
@@ -402,6 +402,8 @@ extension String {
         switch self {
         case "FLGPBK04":
             return "Black V4"
+        case "FLFL8001":
+            return "Flexible 80A"
         default:
             return "Color V1"
         }
@@ -411,6 +413,8 @@ extension String {
         switch self {
         case "TANK_TYPE_DAGUERRE_V2":
             return "Tank V2"
+        case "TANK_TYPE_PDMS":
+            return "Tank V2.1"
         default:
             return "Tank V1"
         }
